@@ -1,4 +1,4 @@
-# MesoOn
+# SmartGate
 Online learning platform builded with Django
 
 ## Setup
@@ -8,4 +8,4 @@ Online learning platform builded with Django
 4. Run app: ``` python manage.py runserver ```
 
 ## Certificate
-This project is officially certificated by **Redian Marku** the creator of this project.
+This project is officially certificated by **Ibrahim M DICKO**.
