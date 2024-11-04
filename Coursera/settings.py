@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware', 
 ]
 
 ROOT_URLCONF = 'Coursera.urls'
@@ -97,7 +98,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -155,12 +155,18 @@ LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+
+ACCOUNT_UNIQUE_EMAIL = True              # Ensure each email is unique in the system
+
+
+
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_URL
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
-ACCOUNT_EMAIL_REQUIRED = False
-ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_EMAIL_REQUIRED = True
+# settings.py
+ACCOUNT_EMAIL_VERIFICATION = "none"  # Valid options: "mandatory", "optional", "none"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'My subject: '
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
 
@@ -181,8 +187,8 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 EMAIL_USE_TLS = True
 EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='put your email here'
-EMAIL_HOST_PASSWORD='put your email password here'
+EMAIL_HOST_USER='ibramdic@gmail.com'
+EMAIL_HOST_PASSWORD='Ibra@1992Gao'
 EMAIL_PORT = 587 
 
 

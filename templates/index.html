@@ -15,28 +15,28 @@
        
       </h2>
       {% else %}
-      <h2>Kurset me te mira online falas</h2>
+      <h2>Les meilleurs cours en ligne </h2>
       {% endif %}
-      <p>MesoOn eshte nje platforme online per mesimin e leksioneve shkollore nga nje staff i dedikuar me mesues dhe trajnere me pervoje te cilat do ja u bejne me te lehte mesimin ne nje menyre te lehte me ane te videove.</p>
+      <p>SmartGate est une plateforme de cours en ligne collaborative et décentralisé</p>
     </div>
     <div class="row">
       <div class="col-lg-10 offset-lg-1">
         <form method="post" action="{% url 'courses:kerko_kurs' %}" class="intro-newslatter"> {% csrf_token %}
           <input name="search" type="text" placeholder="Kerko kursin">
-          <button type="submit" class="site-btn">Kerko kursin</button>
+          <button type="submit" class="site-btn">Rechercher</button>
         </form>
       </div>
     </div>
   </div>
 </section>
-<!-- Hero section end -->
+<!-- fin -->
 
 <!-- categories section -->
 <section class="categories-section spad">
   <div class="container">
     <div class="section-title">
-      <h2 id="kurset">Kategorite dhe Klasat</h2>
-      <p>Mesimet jane te ndara ne kategori te ndryshme sipas klasave dhe nivelit te tyre. Ti duhet te regjistrohesh fillimisht dhe pastaj te ndjekesh klasen te ciles i perket.</p>
+      <h2 id="kurset">Catégories</h2>
+      <p>Les leçons sont réparties en différentes catégories selon les classes et leur niveau. Vous devez d'abord vous inscrire, puis suivre le cours qui vous correspond.</p>
     </div>
     <div class="row">
       {% for cat in category %}
@@ -49,7 +49,7 @@
             <h5>{{cat.titulli|capfirst}}</h5>
 
             <p>{{ cat.pershkrimi|capfirst }}</p>
-            <span><a class="btn btn-success" href="/courses/{{ cat.id }}">Shiko lendet</a></span>
+            <span><a class="btn btn-success" href="/courses/{{ cat.id }}">Voir les matières</a></span>
           </div>
         </div>
       </div>
@@ -63,8 +63,8 @@
 <section class="course-section spad">
   <div class="container">
     <div class="section-title mb-0">
-      <h2>Shembuj kursesh</h2>
-      <p class="pb-3">Keto jani disa shembuj te kurseve te cilet nxensit ndjekin ne platformen tone.</p>
+      <h2>Exemples de cours</h2>
+      <p class="pb-3">Voici quelques exemples de cours que les membres de la communauté suivent sur notre plateforme</p>
     </div>
   </div>
   <div class="course-warp">                                     
@@ -78,13 +78,13 @@
           </div>
           <div class="course-info">
             <div class="course-text">
-              <h5>Gjeometri</h5>
-              <p>Matemetika 10</p>
+              <h5>HTML & CSS</h5>
+              <p>Developpement Web 10</p>
               <div class="students">Klasa 10</div>
             </div>
             <div class="course-author">
               <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
-              <p>Emri Mbiemri, <span>Mesuesit</span></p>
+              <p>Nom et prénom <span>Instructeur</span></p>
             </div>
           </div>
         </div>
@@ -97,13 +97,13 @@
           </div>
           <div class="course-info">
             <div class="course-text">
-              <h5>Elektroliza</h5>
-              <p>Kimia</p>
-              <div class="students">Klasa 12</div>
+              <h5>Javascript</h5>
+              <p>Java</p>
+              <div class="students"> Niveau 1</div>
             </div>
             <div class="course-author">
               <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
-              <p>Emri Mbiemri, <span>Mesuesit</span></p>
+              <p>Nom et prénom, <span>Formateur</span></p>
             </div>
           </div>
         </div>
@@ -116,13 +116,13 @@
           </div>
           <div class="course-info">
             <div class="course-text">
-              <h5>Trigonometri</h5>
-              <p>Marematika</p>
-              <div class="students">Klasa 11</div>
+              <h5>Python</h5>
+              <p>Django</p>
+              <div class="students">Niveau 0</div>
             </div>
             <div class="course-author">
               <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
-              <p>Emri Mbiemri, <span>Mesuesit</span></p>
+              <p>Nom et Prénom, <span>Enseignant</span></p>
             </div>
           </div>
         </div>
@@ -135,13 +135,13 @@
           </div>
           <div class="course-info">
             <div class="course-text">
-              <h5>Qarku Elektrik</h5>
-              <p>Fizika</p>
-              <div class="students">Klasa 11</div>
+              <h5>Java</h5>
+              <p>SpringBoot</p>
+              <div class="students"> Niveau 2</div>
             </div>
             <div class="course-author">
               <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
-              <p>Emri Mbiemri, <span>Mesuesit</span></p>
+              <p>Nom et Prénom, <span>Enseignant</span></p>
             </div>
           </div>
         </div>
@@ -157,13 +157,13 @@
 <!-- signup section -->
 {% if request.user.profile.is_teacher == True %}
 <div class="container">
-  <h1 class="text-center">Llogaria juaj ka akses mesuesi</h1><br>
-  <p class="text-center">Duke pasur nje llogari mesuesi ju tashme keni akses me te plote ne kete platform. Ju mund te kryeni me shume funksione se llogaria fillestare e nxenesit. Disa nga keto funksione jane:</p>
+  <h1 class="text-center">Votre compte a un accès enseignant</h1><br>
+  <p class="text-center">En ayant un compte enseignant, vous avez désormais un accès complet à cette plateforme. Vous pouvez effectuer plus de fonctions que le compte de base d'un apprenant. Certaines de ces fonctions sont :</p>
 
   <div data-aos="fade-right" class="row mt-4 mb-4 bg-light">
     <div class="col-md-4 text-center">
-      <h3 class="p-4">Ju mund te krijoni klasen tuaj</h3> 
-      <a href="{% url 'courses:krijo_klase' %}" class="btn btn-outline-primary m-4">Krijo klasen</a>
+      <h3 class="p-4">Vous pouvez créer votre propre classe.</h3> 
+      <a href="{% url 'courses:krijo_klase' %}" class="btn btn-outline-primary m-4">Créer Classe</a>
     </div>
     <div class="col-md-8">
       <img class="img-fluid w-100" src="{% static 'webuni/img/categories/4.jpg' %}" alt="">
@@ -176,14 +176,14 @@
       </div>
   
     <div class="col-md-4 text-center">
-      <h3 class="p-4">Ju mund te krijoni lendet tuaja</h3> 
-      <a href="{% url 'courses:krijo_lende' %}" class="btn btn-outline-primary m-4">Krijo lenden</a>
+      <h3 class="p-4">Vous pouvez créer vos propres matières.</h3> 
+      <a href="{% url 'courses:krijo_lende' %}" class="btn btn-outline-primary m-4">Créer votre matière</a>
   </div>
 </div>
 
 <div data-aos="fade-right" class="row mt-4 mb-4 bg-light">
   <div class="col-md-4 text-center">
-    <h3 class="p-4">Ju mund te ngarkoni mesimet dhe videot tuaja.</h3> 
+    <h3 class="p-4">Vous pouvez télécharger vos leçons et vos vidéos.</h3> 
     <a href="{% url 'courses:krijo_mesim' %}" class="btn btn-outline-primary m-4">Krijo mesimin</a>
   </div>
   <div class="col-md-8">
@@ -200,8 +200,8 @@
       <div class="col-lg-6">
         <div class="signup-warp">
           <div class="section-title text-white text-left">
-            <h2>Regjistrohu si mesues</h2>
-            <p>Per tu regjistruar si mesues ne platforme ju duhet te plotesoni fushat e meposhtme dhe me pas do te keni aksesin e plote per te ngarkuar kurse dhe video.</p>
+            <h2>Inscrivez-vous en tant qu'enseignant.</h2>
+            <p>Pour vous inscrire en tant qu'enseignant sur la plateforme, vous devez remplir les champs ci-dessous et ensuite vous aurez un accès complet pour créer ou télécharger des cours et des vidéos.</p>
             
           </div>
           <!-- signup form -->
@@ -209,7 +209,7 @@
             <input type="text" placeholder="Emri juaj" name="name">
             <input type="text" placeholder="Emaili" name="e-mail">
             <input type="text" placeholder="Numri i telefonit" name="phone">
-            <button class="site-btn">Dergo Kerkesen</button>
+            <button class="site-btn">Envoyer la demande</button>
           </form>
         </div>
       </div>
