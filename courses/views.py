@@ -1,13 +1,13 @@
 import secrets
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView,ListView,DetailView,View
-from courses.models import Lendet,Lesson,Klasa
+from courses.models import Formation,Lesson,Categorie
 from memberships.models import UserMembership
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import KlasaForm, LendaForm, MesimiForm
+from .forms import CategorieForm, LendaForm, MesimiForm
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -15,7 +15,7 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category = Klasa.objects.all()
+        category = Categorie.objects.all()
         context['category'] = category
         return context
 
@@ -29,7 +29,7 @@ class ContactView(TemplateView):
 
 
 def CourseListView(request, category):
-    courses = Lendet.objects.filter(klasa=category)
+    courses = Formation.objects.filter(Categorie=category)
     context = {
         'courses':courses
     }
@@ -40,13 +40,13 @@ def CourseListView(request, category):
 class CourseDetailView(DetailView):
     context_object_name = 'course'
     template_name = 'courses/course_detail.html'
-    model = Lendet
+    model = Formation
 
 
  
 class LessonDetailView(View,LoginRequiredMixin):
     def get(self, request, course_slug, lesson_slug, *args, **kwargs):
-        course = get_object_or_404(Lendet, slug=course_slug)
+        course = get_object_or_404(Formation, slug=course_slug)
         lesson = get_object_or_404(Lesson, slug=lesson_slug)
         context = {'lesson': lesson}
         return render(request, "courses/lesson_detail.html", context)
@@ -56,7 +56,7 @@ class LessonDetailView(View,LoginRequiredMixin):
 def SearchView(request):
     if request.method == 'POST':
         kerko = request.POST.get('search')
-        results = Lesson.objects.filter(titulli__contains=kerko)
+        results = Lesson.objects.filter(Titre__contains=kerko)
         context = {
             'results':results
         }
@@ -64,26 +64,26 @@ def SearchView(request):
 
 
 @login_required
-def krijo_klase(request):
+def creer_cat(request):
     if not request.user.profile.is_teacher == True:
         messages.error(request, f'Llogaria juaj nuk ka akses ne kete url vetem llogarite e mesuesve!')
         return redirect('courses:home')
     if request.method == 'POST':
-        form = KlasaForm(data=request.POST, files=request.FILES)
+        form = CategorieForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Klasa juaj u krijua.')
+            messages.success(request, f'Categorie juaj u krijua.')
             return redirect('courses:home')
     else:
-        form = KlasaForm()
+        form = CategorieForm()
     context = {
         'form':form
     }
-    return render(request, 'courses/krijo_klase.html', context)
+    return render(request, 'courses/creer_cat.html', context)
 
 
 @login_required
-def krijo_lende(request):
+def creer_formation(request):
     if not request.user.profile.is_teacher == True:
         messages.error(request, f'Llogaria juaj nuk ka akses ne kete url vetem llogarite e mesuesve!')
         return redirect('courses:home')
@@ -91,20 +91,20 @@ def krijo_lende(request):
         form = LendaForm(request.POST)
         if form.is_valid():
             form.save()
-            klasa = form.cleaned_data['klasa']
-            slug = klasa.id
+            Categorie = form.cleaned_data['Categorie']
+            slug = Categorie.id
             messages.success(request, f'Lenda juaj u krijua.')
             return redirect('/courses/' + str(slug))
     else:
-        form = LendaForm(initial={'krijues':request.user.id, 'slug':secrets.token_hex(nbytes=16)})
+        form = LendaForm(initial={'Createur':request.user.id, 'slug':secrets.token_hex(nbytes=16)})
     context = {
         'form':form
     }
-    return render(request, 'courses/krijo_lende.html', context)
+    return render(request, 'courses/creer_formation.html', context)
 
 
 @login_required
-def krijo_mesim(request):
+def creer_cours(request):
     if not request.user.profile.is_teacher == True:
         messages.error(request, f'Llogaria juaj nuk ka akses ne kete url vetem llogarite e mesuesve!')
         return redirect('courses:home')
@@ -121,7 +121,7 @@ def krijo_mesim(request):
     context = {
         'form':form
     }
-    return render(request, 'courses/krijo_mesim.html', context)
+    return render(request, 'courses/creer_cours.html', context)
 
 
 def view_404(request, exception):

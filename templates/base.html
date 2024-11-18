@@ -35,7 +35,7 @@
 	</div>
 
 	<nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav">
-		<div class="container">
+		<div class="container-fluid">
 		  <a class="navbar-brand js-scroll-trigger" href="/"><img src="{% static 'webuni/img/logosmartgate.png' %}" alt=""></a>
 		  <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			Menu
@@ -53,23 +53,26 @@
 			  </li>
 			  {% if request.user.profile.is_teacher == True %}
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:krijo_klase' %}">Créer une classe</a>
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:creer_cat' %}">Créer une catégorie</a>
 			  </li>
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:krijo_lende' %}">créer un chapitre</a>
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:creer_formation' %}">créer une formation</a>
 			  </li>
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:krijo_mesim' %}">Créer un cours</a>
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:creer_cours' %}">Créer un cours</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Blog</a>
 			  </li>
 			  {% else %}
 			  <li class="nav-item mx-0 mx-lg-1">
 				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:contact' %}">Contacts</a>
 			  </li>
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:about' %}">À propos</a>
+				<a class="nav-link py-3 px-0 px-lg-1 rounded js-scroll-trigger" href="{% url 'courses:about' %}">À propos</a>
 			  </li>
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Blog</a>
+				<a class="nav-link py-3 px-0 px-lg-1 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Blog</a>
 			  </li>
 			  {% endif %}
 			  {% if request.user.is_authenticated %}

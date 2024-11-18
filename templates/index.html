@@ -8,7 +8,7 @@
   <div class="container">
     <div class="hero-text text-white">
       {% if request.user.is_authenticated %}
-      <h2>Miresevini {% if request.user.profile.is_teacher == True %}
+      <h2>Bienvenue {% if request.user.profile.is_teacher == True %}
          mesues,
         {% endif %} {{ request.user.username|capfirst }}
 
@@ -21,8 +21,8 @@
     </div>
     <div class="row">
       <div class="col-lg-10 offset-lg-1">
-        <form method="post" action="{% url 'courses:kerko_kurs' %}" class="intro-newslatter"> {% csrf_token %}
-          <input name="search" type="text" placeholder="Kerko kursin">
+        <form method="post" action="{% url 'courses:rechercher_cours' %}" class="intro-newslatter"> {% csrf_token %}
+          <input name="search" type="text" placeholder="Rechercher cours">
           <button type="submit" class="site-btn">Rechercher</button>
         </form>
       </div>
@@ -43,12 +43,12 @@
       <!-- categorie -->
       <div data-aos="zoom-in" class="col-lg-4 col-md-6">
         <div class="categorie-item">
-          <div class="ci-thumb set-bg" data-setbg="{{ cat.imazhi.url }}"></div>
+          <div class="ci-thumb set-bg" data-setbg="{{ cat.Image.url }}"></div>
           <div class="ci-text">
 
-            <h5>{{cat.titulli|capfirst}}</h5>
+            <h5>{{cat.Titre|capfirst}}</h5>
 
-            <p>{{ cat.pershkrimi|capfirst }}</p>
+            <p>{{ cat.Description|capfirst }}</p>
             <span><a class="btn btn-success" href="/courses/{{ cat.id }}">Voir les matières</a></span>
           </div>
         </div>
@@ -80,7 +80,7 @@
             <div class="course-text">
               <h5>HTML & CSS</h5>
               <p>Developpement Web 10</p>
-              <div class="students">Klasa 10</div>
+              <div class="students">Categorie 10</div>
             </div>
             <div class="course-author">
               <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
@@ -163,7 +163,7 @@
   <div data-aos="fade-right" class="row mt-4 mb-4 bg-light">
     <div class="col-md-4 text-center">
       <h3 class="p-4">Vous pouvez créer votre propre classe.</h3> 
-      <a href="{% url 'courses:krijo_klase' %}" class="btn btn-outline-primary m-4">Créer Classe</a>
+      <a href="{% url 'courses:creer_cat' %}" class="btn btn-outline-primary m-4">Créer Classe</a>
     </div>
     <div class="col-md-8">
       <img class="img-fluid w-100" src="{% static 'webuni/img/categories/4.jpg' %}" alt="">
@@ -177,14 +177,14 @@
   
     <div class="col-md-4 text-center">
       <h3 class="p-4">Vous pouvez créer vos propres matières.</h3> 
-      <a href="{% url 'courses:krijo_lende' %}" class="btn btn-outline-primary m-4">Créer votre matière</a>
+      <a href="{% url 'courses:creer_formation' %}" class="btn btn-outline-primary m-4">Créer votre matière</a>
   </div>
 </div>
 
 <div data-aos="fade-right" class="row mt-4 mb-4 bg-light">
   <div class="col-md-4 text-center">
     <h3 class="p-4">Vous pouvez télécharger vos leçons et vos vidéos.</h3> 
-    <a href="{% url 'courses:krijo_mesim' %}" class="btn btn-outline-primary m-4">Krijo mesimin</a>
+    <a href="{% url 'courses:creer_cours' %}" class="btn btn-outline-primary m-4">creer mesimin</a>
   </div>
   <div class="col-md-8">
     <img class="img-fluid w-100" src="{% static 'webuni/img/categories/1.jpg' %}" alt="">
@@ -200,15 +200,15 @@
       <div class="col-lg-6">
         <div class="signup-warp">
           <div class="section-title text-white text-left">
-            <h2>Inscrivez-vous en tant qu'enseignant.</h2>
-            <p>Pour vous inscrire en tant qu'enseignant sur la plateforme, vous devez remplir les champs ci-dessous et ensuite vous aurez un accès complet pour créer ou télécharger des cours et des vidéos.</p>
+            <h2>Inscrivez-vous en tant que créateur de contenu.</h2>
+            <p>Pour vous inscrire en tant que créateur de contenu sur la plateforme, vous devez remplir les champs ci-dessous et ensuite vous aurez un accès complet pour créer ou télécharger des cours et des vidéos.</p>
             
           </div>
-          <!-- signup form -->
-          <form action="/kerkesa/" method="post" class="signup-form">{% csrf_token %}
-            <input type="text" placeholder="Emri juaj" name="name">
-            <input type="text" placeholder="Emaili" name="e-mail">
-            <input type="text" placeholder="Numri i telefonit" name="phone">
+          <!-- demande createur de contenu-->
+          <form action="/Demande/" method="post" class="signup-form">{% csrf_token %}
+            <input type="text" placeholder="nom complet" name="name">
+            <input type="text" placeholder="Adresse E-mail" name="e-mail">
+            <input type="text" placeholder="Numero de téléphone" name="phone">
             <button class="site-btn">Envoyer la demande</button>
           </form>
         </div>

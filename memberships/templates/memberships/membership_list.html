@@ -9,9 +9,9 @@
 <div class="page-info-section set-bg" data-setbg="{% static 'webuni/img/page-bg/2.jpg' %}">
   <div class="container">
     <div class="site-breadcrumb">
-      <a href="#">Home</a>
-      <span>Courses/</span>
-      <span>memberships/</span>
+      <a href="#">Accueil</a>
+      <span>Cours/</span>
+      <span>Communauté/</span>
     </div>
   </div>
 </div>
@@ -24,13 +24,13 @@
     </ul>
     {% endif %}
     <div class="container">
-      <h1 class="pb-4">Membership List</h1>
+      <h1 class="pb-4">Listes des membres</h1>
       <div class="row">
         {% for membership in memberships %}
         <div class="col-sm-4 col-md-4">
           <h3>{{ membership.membership_type }}</h3>
           <h4>Price : ${{ membership.price }} <small>/month</small> </h4>
-          <h5>INCLUDED COURSES</h5>
+          <h5>Cours inclus</h5>
           <ul>
             {% for course in membership.membershipsallowed.all %}
               <li>Title : {{course.title}}</li>
@@ -42,7 +42,7 @@
             {% if membership.membership_type != current_membership %}
             <button type="submit" class="btn btn-warning">Select</button>
             {% else %}
-            <small>This is Your Current Plan</small>
+            <small>Ceci est votre plan</small>
             {% endif %}
             <input type="hidden" name="membership_type" value="{{membership.membership_type}}">
           </form>

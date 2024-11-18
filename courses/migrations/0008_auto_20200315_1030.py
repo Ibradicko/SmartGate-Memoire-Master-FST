@@ -14,22 +14,22 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Lendet',
+            name='Formation',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('slug', models.SlugField()),
-                ('titulli', models.CharField(max_length=30)),
-                ('pershkrimi', models.TextField(max_length=400)),
-                ('krijuar_me', models.DateTimeField(auto_now=True)),
-                ('imazhi_lendes', models.ImageField(default='default.jpg', upload_to='kurs_images')),
-                ('klasa', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.Klasa')),
-                ('krijues', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('Titre', models.CharField(max_length=30)),
+                ('Description', models.TextField(max_length=400)),
+                ('Creer_le', models.DateTimeField(auto_now=True)),
+                ('Image_formation', models.ImageField(default='default.jpg', upload_to='formationimages')),
+                ('Categorie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.Categorie')),
+                ('Createur', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.AlterField(
             model_name='lesson',
             name='course',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='courses.Lendet'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='courses.Formation'),
         ),
         migrations.DeleteModel(
             name='Course',

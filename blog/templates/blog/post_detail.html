@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
       <div class="col-lg-9">
-          <h1>Detajet e postimit:</h1>
+          <h1>Détails de la publication : </h1>
         <!-- blog post -->
         <div class="blog-post">
           <img src="img/blog/1.jpg" alt="">
@@ -22,10 +22,16 @@
             </div>
           </div>
           <p>{{ post.text|capfirst }} </p>
-          <a href="/blog/" class="btn btn-dark">Kthehu</a>
+          {% if post.image %}
+                <img src="{{ post.image.url }}" alt="Image de la publication">
+            {% endif %}
+          <a href="/blog/" class="btn btn-dark">Retour</a>
           {% if post.author == request.user %}
-          <a href="/blog/{{ post.id }}/delete" class="btn btn-danger">Fshij Postimin</a>
+          <a href="/blog/{{ post.id }}/delete" class="btn btn-danger">Supprimer la publication</a>
           {% endif %}
+
+
+          
         </div>
       </div>
     </div>

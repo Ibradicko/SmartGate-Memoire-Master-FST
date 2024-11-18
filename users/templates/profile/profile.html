@@ -13,7 +13,7 @@
     </div>
   {% endfor %}
 {% endif %}
-<h1 class="entry-title">{% block blockname %} Profile. {% endblock blockname %} </h1>
+<h1 class="entry-title">{% block blockname %} Profili {% endblock blockname %} </h1>
 {% block content %}
 <!-- background-color: beige;
     color: #ab00ff; -->
@@ -26,7 +26,7 @@
 </div>
 <div class="container">
   
-<div class="container-fluid pl-5 pr-5 pb-3 " style="border-radius:5px;background-color: beige;color: #ab00ff;"><h5><legend class="border-bottom mb-4 pt-4 display-3 text-center">PROFILI</legend></h5>
+<div class="container-fluid pl-5 pr-5 pb-3 " style="border-radius:5px;background-color: beige;color: #ab00ff;"><h5><legend class="border-bottom mb-4 pt-4 display-3 text-center">VOTRE PROFIL</legend></h5>
   <div class="content-section">
     <div class="media">
       <img class="rounded-circle account-img p-2" style="width:100px; height:100px;" src="{{ user.profile.profile_pic.url }}">
@@ -42,21 +42,21 @@
            {{ p_form|crispy }}
        </fieldset>
        <div class="form-group">
-           <button class="btn btn-outline-success" type="submit">Perditso profilin</button>
+           <button class="btn btn-outline-success" type="submit">Mettre à jour le profil</button>
        </div>
    </form>
    {% if request.user.profile.is_teacher == True %}
-   <div class="alert alert-info">Llogaria juaj ka akses te plote mesuesi.</div>
+   <div class="alert alert-info">Votre compte a un accès complet à l'enseignant.</div>
    {% else %}
-   <div class="alert alert-info">Llogaria juaj ka vetem akses si nxenes.</div>
+   <div class="alert alert-info">Votre compte a uniquement un accès apprenant</div>
    {% endif %}
 </div>
 </div>
 {% comment %}
-<h2 class="text-center">My Created Events </h2>
+<h2 class="text-center">Mes événements créés </h2>
     <div class="card w-80 mb-3 ">
     <div class="card-body">
-        <h2 class="card-title mb-5"><a class="text-capitalize" href="{% url 'events:event_detail' pk=event.pk %}">{{event.title}}</a> <span class="ml-5 badge badge-info">{{event.comments.count }} comments</span> </h2>
+        <h2 class="card-title mb-5"><a class="text-capitalize" href="{% url 'events:event_detail' pk=event.pk %}">{{event.title}}</a> <span class="ml-5 badge badge-info">{{event.comments.count }} Commentaires</span> </h2>
     </div>
     </div>
 </div>

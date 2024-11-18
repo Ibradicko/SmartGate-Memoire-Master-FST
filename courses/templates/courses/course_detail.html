@@ -8,9 +8,9 @@
 <div class="page-info-section set-bg" data-setbg="{% static 'webuni/img/page-bg/2.jpg' %}">
   <div class="container">
     <div class="site-breadcrumb">
-      <a href="/">Kryefaqe</a>
-      <span>Klasa /</span>
-      <span>Mesimi</span>
+      <a href="/">Page d'accueil</a>
+      <span>Classe /</span>
+      <span>Enseignement</span>
     </div>
   </div>
 </div>
@@ -22,14 +22,14 @@
   <div class="container">
     <div class="search-warp">
       <div class="section-title text-white">
-        <h2><span>Kerko kurse</span></h2>
+        <h2><span> Chercher des courses</span></h2>
       </div>
       <div class="row">
         <div class="col-lg-10 offset-lg-1">
           <!-- search form -->
-          <form method="post" action="{% url 'courses:kerko_kurs' %}" class="intro-newslatter"> {% csrf_token %}
+          <form method="post" action="{% url 'courses:rechercher_cours' %}" class="intro-newslatter"> {% csrf_token %}
             <input name="search" type="text" placeholder="Kerko kursin">
-            <button type="submit" class="site-btn btn-dark">Kerko kursin</button>
+            <button type="submit" class="site-btn btn-dark">Chercher le courses</button>
           </form>
         </div>
       </div>
@@ -46,35 +46,35 @@
       <div class="row">
         <div class="col-lg-10 offset-lg-1">
           
-          <h3>{{course.titulli|capfirst}}</h3>
+          <h3>{{course.Titre|capfirst}}</h3>
           <div class="course-metas">
             <div class="course-meta">
               <div class="course-author">
                 <h6>Mesuesi</h6>
-                <p>{{course.krijues|capfirst}}, <span>Mesues</span></p>
+                <p>{{course.Createur|capfirst}}, <span>Enseignant</span></p>
               </div>
             </div>
             <div class="course-meta">
               <div class="cm-info">
-                <h6>Klasa</h6>
-                <p>{{course.klasa}}</p>
+                <h6>Classe</h6>
+                <p>{{course.Categorie}}</p>
               </div>
             </div>
             <div class="course-meta">
               <div class="cm-info">
-                <h6>Pershkrimi i klases</h6>
-                <p>{{course.pershkrimi}}</p>
+                <h6>Description de la classe</h6>
+                <p>{{course.Description}}</p>
               </div>
             </div>
             <div class="course-meta">
               <div class="cm-info">
-                <h6>Numri i mesimeve</h6>
+                <h6>Nombre de leçons</h6>
                 <p>{{ course.lessons|length }}</p>
               </div>
             </div>
           </div>
-          <a href="/courses/{{ course.id }}" class="site-btn price-btn">Mbrapa</a>
-          <a href="#vazhdo" class="site-btn buy-btn">Vazhdo Mesimin</a>
+          <a href="/courses/{{ course.id }}" class="site-btn price-btn">Retour</a>
+          <a href="#vazhdo" class="site-btn buy-btn">Continuer l'enseignement</a>
         </div>
       </div>
     </div>
@@ -82,16 +82,16 @@
     <div class="row">
       <div class="col-lg-10 offset-lg-1 course-list">
         <div class="cl-item" id="lessons">
-          <h4>Mesimet ne kete klase</h4>
+          <h4>Les leçons dans cette classe</h4>
           {% if course.lessons != None  %}
             {% for lesson in course.lessons %}
             <div data-aos="fade-right" >
-              <h5 class="pb-3">Mesimi {{lesson.pozicioni}} <a id="vazhdo" href="{{ lesson.get_absolute_url }}#video"><span class="pl-4">{{lesson.titulli}}</span></a></h5>
+              <h5 class="pb-3">Leçon {{lesson.position}} <a id="vazhdo" href="{{ lesson.get_absolute_url }}#video"><span class="pl-4">{{lesson.Titre}}</span></a></h5>
             </div>
             {% endfor %}
           {% endif %}
           {% if course.lessons|length == 0 %}
-          <div class="alert alert-danger">Nuk ka akoma asnje mesim per kete klase!</div>
+          <div class="alert alert-danger">Il n'y a pas encore de leçon pour cette classe !</div>
           {% endif %} 
         </div>
       </div>

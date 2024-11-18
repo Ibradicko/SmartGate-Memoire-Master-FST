@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('video_url', models.FileField(null=True, upload_to='videos/')),
                 ('thumbnail', models.ImageField(upload_to='')),
                 ('position', models.IntegerField()),
-                ('course', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='courses.Lendet')),
+                ('course', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='courses.Formation')),
             ],
         ),
         migrations.DeleteModel(

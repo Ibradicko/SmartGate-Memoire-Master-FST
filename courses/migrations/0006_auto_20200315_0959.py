@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='course',
-            name='imazhi_kursit',
-            field=models.ImageField(default='default.jpg', upload_to='kurs_images'),
+            name='Image_kursit',
+            field=models.ImageField(default='default.jpg', upload_to='formationimages'),
         ),
     ]

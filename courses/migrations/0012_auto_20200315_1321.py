@@ -18,12 +18,12 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='lesson',
             old_name='position',
-            new_name='pozicioni',
+            new_name='position',
         ),
         migrations.RenameField(
             model_name='lesson',
             old_name='title',
-            new_name='titulli',
+            new_name='Titre',
         ),
         migrations.RemoveField(
             model_name='lesson',

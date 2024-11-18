@@ -20,14 +20,14 @@
 </div>
 <div class='col-lg-10 offset-md-1 mt-5 mb-4 p-4' >
 
-    <h1>{% trans "Hyr ne Platforme" %}</h1>
+    <h1>{% trans "Se connecter" %}</h1>
 
     {% get_providers as socialaccount_providers %}
 
     {% if socialaccount_providers %}
 
-    <p>{% blocktrans with site.name as site_name %}Ju lutem hyni me nje nga adresat e juaja ekzistuese Ose, <a href="{{ signup_url }}">regjistrohuni</a>
-    per nje adrese{{ site_name }} dhe pastaj hyni duke klikuar me poshte:{% endblocktrans %}</p>
+    <p>{% blocktrans with site.name as site_name %}Veuillez vous connecter avec l'une de votre adresse <a href="{{ signup_url }}">Inscrivez-vous</a>
+      Pour une adresse {{ site_name }} Et puis connectez-vous en cliquant ci-dessous :{% endblocktrans %}</p>
 
     <div class="socialaccount_ballot">
 
@@ -42,8 +42,8 @@
     {% include "socialaccount/snippets/login_extra.html" %}
 
     {% else %}
-    <p>{% blocktrans %}Nese nuk keni krijuar nje adrese akoma, ju lutem
-    <a href="{{ signup_url }}">regjistrohuni</a> fillimisht.{% endblocktrans %}</p>
+    <p>{% blocktrans %}Si vous n'avez pas encore créé d'adresse, veuillez
+    <a href="{{ signup_url }}">vous inscrire</a> D'abord.{% endblocktrans %}</p>
     {% endif %}
 
     <form class="login" method="POST" action="{% url 'account_login' %}">
@@ -52,8 +52,8 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Keni harruar fjalkalimin?" %}</a>
-        <button class="primaryAction btn btn-primary" type="submit">{% trans "Hyr" %}</button>
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Vous avez oublié votre mot de passe ?" %}</a>
+        <button class="primaryAction btn btn-primary" type="submit">{% trans "Se connecter" %}</button>
     </form>
 
 </div>

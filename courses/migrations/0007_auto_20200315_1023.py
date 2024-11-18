@@ -12,21 +12,21 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RenameModel(
             old_name='Category',
-            new_name='Klasa',
+            new_name='Categorie',
         ),
         migrations.RenameField(
-            model_name='klasa',
+            model_name='Categorie',
             old_name='image',
-            new_name='imazhi',
+            new_name='Image',
         ),
         migrations.RenameField(
-            model_name='klasa',
+            model_name='Categorie',
             old_name='short_description',
-            new_name='pershkrimi',
+            new_name='Description',
         ),
         migrations.RenameField(
-            model_name='klasa',
+            model_name='Categorie',
             old_name='title',
-            new_name='titulli',
+            new_name='Titre',
         ),
     ]

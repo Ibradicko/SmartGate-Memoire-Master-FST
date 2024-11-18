@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from users.forms import profileUpdateForm, userUpdateForm
 from users.models import Profile as Pro
-from users.models import  Kerkesat
+from users.models import  Demandet
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
@@ -52,20 +52,20 @@ def Profile(request):
     return render(request,'profile/profile.html',context)
 
 
-def kerkesa(request):
+def Demande(request):
     if request.method == 'POST':
         emri = request.POST.get('name')
         email = request.POST.get('e-mail')
         numri_tel = request.POST.get('phone')
         prof = request.user.profile
-        kerkesa = Kerkesat(profili=prof, emri=emri, email=email, numri_tel=numri_tel)
-        kerkesa.save()
+        Demande = Demandet(profili=prof, emri=emri, email=email, numri_tel=numri_tel)
+        Demande.save()
         prof_id = prof.id
         Pro.objects.filter(id=prof_id).update(is_teacher=True)
         
-        message = 'Kerkesa juaj per nje llogari mesuesi u pranua! Tani ju mund te ktheheni tek MesoOn dhe te ngarkoni kurse dhe leksione, pune te mbare!'
+        message = 'Demande juaj per nje llogari mesuesi u pranua! Tani ju mund te ktheheni tek MesoOn dhe te ngarkoni kurse dhe leksione, pune te mbare!'
         send_mail(
-            'MesoOn, kerkesa u pranua.',
+            'MesoOn, Demande u pranua.',
             message,
             'mesoon@no-reply.com',
             [email],
@@ -78,7 +78,7 @@ def kerkesa(request):
             ['redian1marku@gmail.com'],
             fail_silently=False,
         )
-        messages.info(request, f'Kerkesa u dergua me sukses, ju do te njoftoheni me email.')
+        messages.info(request, f'Demande u dergua me sukses, ju do te njoftoheni me email.')
         return redirect('courses:home')
 
 

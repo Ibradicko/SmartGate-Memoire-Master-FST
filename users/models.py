@@ -22,7 +22,7 @@ class Profile(models.Model):
             img.save(self.profile_pic.path)
 
 
-class Kerkesat(models.Model):
+class Demandet(models.Model):
     profili = models.ForeignKey(Profile, on_delete=models.CASCADE)
     emri = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
