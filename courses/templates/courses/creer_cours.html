@@ -2,11 +2,54 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+{{ form.media }} 
 <div class="container">
     <h1>Créer un cours</h1>
-        <form method="post" action="/creer/mesim">{% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn mb-4 btn-primary">Créer un cours</button>
-        </form>
+    <form method="post" action="{% url 'courses:creer_cours' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn mb-4 btn-primary">Créer un cours</button>
+    </form>
 </div>
+
+<!-- JavaScript pour le chargement dynamique des formations -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const categorieSelect = document.querySelector('#id_categorie'); // Champ de sélection pour la catégorie
+    const formationSelect = document.querySelector('#id_formation'); // Champ de sélection pour la formation
+
+    categorieSelect.addEventListener('change', function () {
+        const categorieId = this.value; // Récupère l'ID de la catégorie sélectionnée
+
+        // Réinitialiser les formations : Efface les options actuelles
+        formationSelect.innerHTML = '<option value="">Sélectionnez une formation</option>';
+
+        if (categorieId) { // Si une catégorie est sélectionnée
+            const getFormationsURL = '/get-formations-by-categorie/'; // URL de l'API côté serveur
+
+            // Requête AJAX pour récupérer les formations liées à la catégorie sélectionnée
+            fetch(`${getFormationsURL}?categorie_id=${categorieId}`)
+                .then(response => {
+                    if (!response.ok) { // Vérifie si la réponse HTTP est correcte
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json(); // Convertit la réponse en JSON
+                })
+                .then(data => {
+                    // Parcourt les formations retournées et les ajoute au champ de sélection
+                    data.forEach(formation => {
+                        const option = document.createElement('option'); // Crée une balise <option>
+                        option.value = formation.id; // Définit la valeur de l'option (ID de la formation)
+                        option.textContent = formation.Titre; // Texte affiché (Titre de la formation)
+                        formationSelect.appendChild(option); // Ajoute l'option au champ de sélection
+                    });
+                })
+                .catch(error => console.error('Erreur lors du chargement des formations :', error)); // Gère les erreurs
+        }
+    });
+});
+
+</script>
+
+
 {% endblock %}

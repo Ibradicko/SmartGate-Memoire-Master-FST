@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="{% static 'webuni/css/style.css'%}"/>
 	<link rel="stylesheet" href="{% static 'webuni/css/freelancer.css'%}"/>
 	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+	<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
 	<!--[if lt IE 9]>
@@ -62,7 +63,7 @@
 				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:creer_cours' %}">Créer un cours</a>
 			  </li>
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Blog</a>
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Forum</a>
 			  </li>
 			  {% else %}
 			  <li class="nav-item mx-0 mx-lg-1">
@@ -72,7 +73,7 @@
 				<a class="nav-link py-3 px-0 px-lg-1 rounded js-scroll-trigger" href="{% url 'courses:about' %}">À propos</a>
 			  </li>
 			  <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-1 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Blog</a>
+				<a class="nav-link py-3 px-0 px-lg-1 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Forum</a>
 			  </li>
 			  {% endif %}
 			  {% if request.user.is_authenticated %}

@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
+{{ form.media }} 
 <div class="container">
     <h1>Créer une catégorie de formation</h1>
-        <form method="post" action="/creer/categorie" enctype='multipart/form-data'>{% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn mb-4 btn-primary">Créer</button>
-        </form>
+    <form method="post" action="{% url 'courses:creer_cat' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn mb-4 btn-primary">Créer</button>
+    </form>
 </div>
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>  <!-- Assurez-vous que ckeditor.js est chargé -->
+
+<script>
+    CKEDITOR.replace('id_Description');  
+</script>
 {% endblock %}

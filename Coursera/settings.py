@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'bootstrap4',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +102,15 @@ DATABASES = {
     }
 }
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',  # le style de la barre d'outils
+        'height': 300,
+        'width': 'auto',
+        'allowedContent': True,
+    },
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -142,9 +153,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
     ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 #media
 MEDIA_URL = '/media/'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -199,3 +214,4 @@ if DEBUG:
 else:
     STRIPE_PUBLISHABLE_KEY = 'pk_test_LI02rx6BCdiFgRYQbCaU28o0'
     STRIPE_SECRET_KEY = 'sk_test_FL1E1hwRQeavTXT99MzMCsDc'
+

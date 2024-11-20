@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from courses.views import HomeView,AboutView,ContactView,CourseListView, CourseDetailView,LessonDetailView, SearchView, creer_cat, creer_formation, creer_cours
+from courses.views import HomeView,AboutView,ContactView,CourseListView, CourseDetailView,LessonDetailView, SearchView, creer_cat, creer_formation, creer_cours, get_formations_by_categorie
 
 app_name = 'courses'
 
@@ -15,5 +15,6 @@ urlpatterns = [
     path('search/', SearchView, name='rechercher_cours'),
     path('creer/categorie', creer_cat, name='creer_cat'),
     path('creer/lende', creer_formation, name='creer_formation'),
-    path('creer/mesim', creer_cours, name='creer_cours')
+    path('creer/cours', creer_cours, name='creer_cours'),
+    path('get-formations-by-categorie/', get_formations_by_categorie, name='get_formations_by_categorie'),
 ]

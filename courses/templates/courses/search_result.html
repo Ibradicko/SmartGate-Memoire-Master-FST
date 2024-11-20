@@ -27,7 +27,7 @@
         {% for lesson in results %}
         <div class="mix col-lg-4 col-md-4 col-sm-6 finance">
           <div class="course-item">
-              <a href="/courses/{{ lesson.lenda.slug }}/">
+              <a href="/courses/{{ lesson.formation.slug }}/">
             <div class="course-thumb set-bg" data-setbg="{% static 'webuni/img/courses/4.jpg' %}">
               <iframe width="100%" height="290" src="https://www.youtube.com/embed/{{ lesson.video_id }}?controls=0"  frameborder="0" controls allowfullscreen></iframe>  
               
@@ -35,7 +35,7 @@
             <div class="course-info">
               <div class="course-text">
                 <h5>{{ lesson.Titre }}</h5>
-                <p>{{ lesson.lenda }}</p>
+                <p>{{ lesson.formation }}</p>
                 <div class="students">Classe 10</div>
               </div>
             </a>

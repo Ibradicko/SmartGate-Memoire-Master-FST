@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CategorieForm, LendaForm, MesimiForm
+from .forms import CategorieForm, FormationForm, CoursForm
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -65,21 +65,20 @@ def SearchView(request):
 
 @login_required
 def creer_cat(request):
-    if not request.user.profile.is_teacher == True:
-        messages.error(request, f'Llogaria juaj nuk ka akses ne kete url vetem llogarite e mesuesve!')
+    if not request.user.profile.is_teacher:
+        messages.error(request, "Accès réservé aux enseignants.")
         return redirect('courses:home')
+
     if request.method == 'POST':
         form = CategorieForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Categorie juaj u krijua.')
+            messages.success(request, "La catégorie a été créée avec succès.")
             return redirect('courses:home')
     else:
         form = CategorieForm()
-    context = {
-        'form':form
-    }
-    return render(request, 'courses/creer_cat.html', context)
+
+    return render(request, 'courses/creer_cat.html', {'form': form})
 
 
 @login_required
@@ -88,50 +87,66 @@ def creer_formation(request):
         messages.error(request, f'Llogaria juaj nuk ka akses ne kete url vetem llogarite e mesuesve!')
         return redirect('courses:home')
     if request.method == 'POST':
-        form = LendaForm(request.POST)
+        form = FormationForm(request.POST)
         if form.is_valid():
             form.save()
             Categorie = form.cleaned_data['Categorie']
             slug = Categorie.id
-            messages.success(request, f'Lenda juaj u krijua.')
+            messages.success(request, f'formation juaj u krijua.')
             return redirect('/courses/' + str(slug))
     else:
-        form = LendaForm(initial={'Createur':request.user.id, 'slug':secrets.token_hex(nbytes=16)})
+        form = FormationForm(initial={'Createur':request.user.id, 'slug':secrets.token_hex(nbytes=16)})
     context = {
         'form':form
     }
     return render(request, 'courses/creer_formation.html', context)
 
 
+
 @login_required
 def creer_cours(request):
-    if not request.user.profile.is_teacher == True:
-        messages.error(request, f'Llogaria juaj nuk ka akses ne kete url vetem llogarite e mesuesve!')
+    if not request.user.profile.is_teacher:
+        messages.error(request, "Accès réservé aux enseignants.")
         return redirect('courses:home')
     if request.method == 'POST':
-        form = MesimiForm(request.POST)
+        form = CoursForm(request.POST)
         if form.is_valid():
             form.save()
-            lenda = form.cleaned_data['lenda']
-            slug = lenda.slug
-            messages.success(request, f'Mesimi juaj u krijua.')
-            return redirect('/courses/' + str(slug) )
+            formation = form.cleaned_data['formation']
+            slug = formation.slug
+            messages.success(request, 'Cours créé avec succès.')
+            return redirect('/courses/' + str(slug))
     else:
-        form = MesimiForm(initial={'slug':secrets.token_hex(nbytes=16)})
-    context = {
-        'form':form
-    }
-    return render(request, 'courses/creer_cours.html', context)
+        form = CoursForm(initial={'slug': secrets.token_hex(nbytes=16)})
+    return render(request, 'courses/creer_cours.html', {'form': form})
+
+
+@login_required
+def get_formations_by_categorie(request):
+    categorie_id = request.GET.get('categorie_id')
+    if categorie_id:
+        formations = Formation.objects.filter(Categorie_id=categorie_id).values('id', 'Titre')
+        return JsonResponse(list(formations), safe=False)
+    return JsonResponse({'error': 'Invalid category ID'}, status=400)
 
 
 def view_404(request, exception):
     return render(request, '404.html')
 
+
 def view_403(request, exception):
     return render(request, '403.html')
 
+
 def view_500(request):
     return render(request, '500.html')
+
+
+
+
+
+
+
 
 # def get(self,request,course_slug,lesson_slug,*args,**kwargs):
 #
@@ -151,3 +166,13 @@ def view_500(request):
 #         context = {'lesson':lesson}
 #
 #     return render(request,'courses/lesson_detail.html',context)
+from django.http import JsonResponse
+
+@login_required
+def get_formations_by_categorie(request):
+    categorie_id = request.GET.get('categorie_id')
+    if categorie_id:
+        formations = Formation.objects.filter(Categorie_id=categorie_id).values('id', 'Titre')
+        return JsonResponse(list(formations), safe=False)
+    return JsonResponse({'error': 'Invalid category ID'}, status=400)
+
